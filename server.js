@@ -9,6 +9,7 @@ const authRouter = require('./routes/authRouter')
 
 const server = express()
 server.use(helmet())
+server.use(logger)
 server.use(express.json())
 server.use(
   cors({
@@ -32,6 +33,11 @@ mongoose
 server.get('/', (req, res) => {
   return res.status(200).json({ message: 'API is up 🚀' })
 })
+
+function logger(req, res, next) {
+  console.log(`${req.method} to ${req.originalUrl}`)
+  next()
+}
 
 server.all('*', (req, res) => {
   res.status(404).json({ message: 'This URL can not be found' })
