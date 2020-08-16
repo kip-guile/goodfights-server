@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   bio: { type: String, required: false },
   location: { type: String, required: false },
   username: { type: String, required: true },
+  website: { type: String, required: false },
   created_at: { type: Date, default: Date.now },
 })
 

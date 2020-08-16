@@ -5,6 +5,8 @@ const cors = require('cors')
 const mongoURI = require('./config/keys')
 const mongoose = require('mongoose')
 
+const authRouter = require('./routes/authRouter')
+
 const server = express()
 server.use(helmet())
 server.use(express.json())
@@ -14,6 +16,8 @@ server.use(
     credentials: true,
   })
 )
+
+server.use('/api/auth', authRouter)
 
 mongoose
   .connect(mongoURI, {
