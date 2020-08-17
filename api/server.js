@@ -6,6 +6,7 @@ const mongoURI = require('../config/keys')
 const mongoose = require('mongoose')
 
 const authRouter = require('../routes/authRouter')
+const fighterRouter = require('../routes/fighterRouter')
 
 const server = express()
 server.use(helmet())
@@ -19,6 +20,7 @@ server.use(
 )
 
 server.use('/api/auth', authRouter)
+server.use('/api/fighters', fighterRouter)
 
 mongoose
   .connect(mongoURI, {

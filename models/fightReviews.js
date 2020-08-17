@@ -27,4 +27,4 @@ const fightReviewSchema = mongoose.Schema({
 })
 
 const FighterReview = mongoose.model('fightReview', fightReviewSchema)
-model.exports = FighterReview
+module.exports = FighterReview

@@ -36,4 +36,4 @@ const fighterSchema = mongoose.Schema({
 })
 
 const Fighter = mongoose.model('fighter', fighterSchema)
-model.exports = Fighter
+module.exports = Fighter

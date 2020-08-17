@@ -13,4 +13,4 @@ const divisionSchema = mongoose.Schema({
 })
 
 const Division = mongoose.model('division', divisionSchema)
-model.exports = Division
+module.exports = Division
