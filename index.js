@@ -1,4 +1,4 @@
-const server = require('./server')
+const server = require('./api/server')
 const port = process.env.PORT
 
 server.listen(port, () => {

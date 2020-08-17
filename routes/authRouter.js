@@ -6,4 +6,9 @@ const userController = require('../controllers/user/index')
 // @access Public
 router.post('/register', userController.register)
 
+// @route POST api/auth/login
+// @desc Login user
+// @access Public
+router.post('/login', userController.login)
+
 module.exports = router
