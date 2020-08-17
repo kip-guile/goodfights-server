@@ -12,6 +12,18 @@ const userSchema = new mongoose.Schema({
   location: { type: String, required: false },
   username: { type: String, required: true },
   website: { type: String, required: false },
+  fighters: [
+    {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Fighter',
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   created_at: { type: Date, default: Date.now },
 })
 
