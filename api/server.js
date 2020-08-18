@@ -9,6 +9,7 @@ const authRouter = require('../routes/authRouter')
 const fighterRouter = require('../routes/fighterRouter')
 const divisionRouter = require('../routes/divisionRouter')
 const fightRouter = require('../routes/fightRouter')
+const fightReviewRouter = require('../routes/fightReviewRouter')
 
 const server = express()
 server.use(helmet())
@@ -25,6 +26,7 @@ server.use('/api/auth', authRouter)
 server.use('/api/fighters', fighterRouter)
 server.use('/api/divisions', divisionRouter)
 server.use('/api/fights', fightRouter)
+server.use('/api/reviews', fightReviewRouter)
 
 mongoose
   .connect(mongoURI, {

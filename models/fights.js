@@ -27,14 +27,9 @@ const fightSchema = mongoose.Schema({
   },
   fighters: [
     {
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Fighter',
-      },
-      name: {
-        type: String,
-        required: true,
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Fighter',
+      required: true,
     },
   ],
   created_at: {

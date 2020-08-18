@@ -11,18 +11,11 @@ const fightReviewSchema = mongoose.Schema({
     ref: 'Fight',
     required: true,
   },
-  division: [
-    {
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Division',
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  divisionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Division',
+    required: true,
+  },
   review: {
     type: String,
     required: true,
@@ -30,13 +23,14 @@ const fightReviewSchema = mongoose.Schema({
   },
   rating: {
     type: Number,
-    required: true,
   },
   created_at: {
     type: Date,
     default: Date.now,
   },
 })
+
+fightReviewSchema.index({ fight: 1, user: 1 }, { unique: true })
 
 const FighterReview = mongoose.model('fightReview', fightReviewSchema)
 module.exports = FighterReview

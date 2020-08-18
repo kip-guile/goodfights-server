@@ -19,14 +19,8 @@ const fighterSchema = mongoose.Schema({
   },
   division: [
     {
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Division',
-      },
-      name: {
-        type: String,
-        required: true,
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Division',
     },
   ],
   created_at: {

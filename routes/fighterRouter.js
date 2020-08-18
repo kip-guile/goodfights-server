@@ -4,6 +4,7 @@ const {
   getFighters,
   getSingleFighter,
   editFighter,
+  deleteFighter,
 } = require('../controllers/fighter/index')
 const verifyToken = require('../middleware/verifyToken')
 
@@ -26,5 +27,10 @@ router.put('/:fighter_id', verifyToken, editFighter)
 // @desc Get a single fighter
 // @access Private
 router.get('/:fighter_id', verifyToken, getSingleFighter)
+
+// @route DELETE /api/fighters/:fighter_id
+// @desc Delete a single fighter
+// @access Private
+router.delete('/:fighter_id', verifyToken, deleteFighter)
 
 module.exports = router
