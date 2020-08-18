@@ -11,6 +11,18 @@ const fightReviewSchema = mongoose.Schema({
     ref: 'Fight',
     required: true,
   },
+  division: [
+    {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Division',
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   review: {
     type: String,
     required: true,

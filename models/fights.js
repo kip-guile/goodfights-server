@@ -17,9 +17,12 @@ const fightSchema = mongoose.Schema({
   rating: {
     type: Number,
   },
+  title_fight: {
+    type: Boolean,
+  },
   division: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Division',
     required: true,
   },
   fighters: [
