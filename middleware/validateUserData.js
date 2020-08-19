@@ -33,6 +33,29 @@ exports.validateSignUpData = (data) => {
   }
 }
 
+exports.validateEditUserData = (data) => {
+  let errors = {}
+
+  let { admin, bio, location, website, fighters } = data
+  admin = admin || false
+  bio = bio || ''
+  location = location || ''
+  website = website || ''
+  fighters = fighters || []
+
+  if (isEmpty(data.email)) {
+    errors.email = 'Email must not be empty'
+  } else if (!isEmail(data.email)) {
+    errors.email = 'Please enter a valid email'
+  }
+  if (isEmpty(data.username)) errors.username = 'Username must not be empty'
+
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false,
+  }
+}
+
 exports.validateLoginData = (data) => {
   let errors = {}
   if (isEmpty(data.email)) errors.email = 'Email must not be empty'

@@ -4,6 +4,7 @@ const {
   getReviews,
   editReview,
   deleteReview,
+  getUserReviews,
 } = require('./reviewControllers')
 
 module.exports = {
@@ -12,4 +13,5 @@ module.exports = {
   getReviews,
   editReview,
   deleteReview,
+  getUserReviews,
 }

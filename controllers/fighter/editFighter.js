@@ -22,7 +22,7 @@ async function editFighter(req, res) {
       { $set: newFighterDetails },
       { new: true }
     )
-    return res.status(200).json(updatedFighter)
+    return res.status(200).json({ message: 'user updated' })
   } catch (err) {
     res.status(500).json({ message: err.message })
   }

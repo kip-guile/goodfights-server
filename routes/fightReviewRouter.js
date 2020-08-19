@@ -33,4 +33,9 @@ router.get('/:review_id', verifyToken, getSingleReview)
 // @access Private
 router.delete('/:review_id', verifyToken, deleteReview)
 
+// @route GET /api/reviews/
+// @desc Get all reviews
+// @access Private
+router.get('/', verifyToken, getReviews)
+
 module.exports = router
