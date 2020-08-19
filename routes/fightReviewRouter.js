@@ -8,15 +8,15 @@ const {
 } = require('../controllers/fightReviews/index')
 const verifyToken = require('../middleware/verifyToken')
 
-// @route POST /api/reviews/
-// @desc Add a Review
-// @access Private
-router.post('/', verifyToken, addReview)
-
 // @route GET /api/reviews/
 // @desc Get all reviews
 // @access Private
 router.get('/', verifyToken, getReviews)
+
+// @route POST /api/reviews/
+// @desc Add a Review
+// @access Private
+router.post('/:fight_id', verifyToken, addReview)
 
 // @route PUT /api/reviews/:review_id
 // @desc Edit a review's details

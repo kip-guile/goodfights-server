@@ -4,6 +4,7 @@ const generateToken = (user) => {
     subject: user.id,
     email: user.email,
     username: user.username,
+    admin: user.admin,
   }
   const options = {
     expiresIn: '1d',

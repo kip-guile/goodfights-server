@@ -6,7 +6,7 @@ const { validateSignUpData } = require('../../middleware/validateUserData')
 const register = (req, res) => {
   const { errors, valid } = validateSignUpData(req.body)
   if (!valid) return res.status(400).json(errors)
-  const { email, password, username } = req.body
+  const { email, password, username, admin } = req.body
   //check if user exists
   Users.findOne({ email }).then((user) => {
     if (user)
@@ -17,6 +17,7 @@ const register = (req, res) => {
       email,
       password,
       username,
+      admin,
     })
 
     //Hash password
@@ -31,6 +32,7 @@ const register = (req, res) => {
             id: user.id,
             email: user.email,
             username: user.username,
+            admin: user.admin,
           },
           token,
         })

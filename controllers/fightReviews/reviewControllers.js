@@ -4,7 +4,10 @@ const { validateReviews } = require('../../middleware/validateReviews')
 async function addReview(req, res) {
   const { errors, valid } = validateReviews(req.body)
   if (!valid) return res.status(400).json(errors)
-  const { userId, fightId, divisionId, review, rating } = req.body
+  const { subject } = req.decodedToken
+  const fightId = req.params.fight_id
+  const userId = subject
+  const { divisionId, review, rating } = req.body
   try {
     const queriedreview = await Reviews.findOne({ userId, fightId })
     if (queriedreview) {

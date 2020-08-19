@@ -35,7 +35,9 @@ mongoose
     useFindAndModify: false,
     useCreateIndex: true,
   })
-  .then(() => console.log('MongoDB plugged in just fine ...'))
+  .then((conn) =>
+    console.log(`MongoDB plugged in just fine: ${conn.connection.host}`)
+  )
   .catch((err) => console.log(err))
 
 server.get('/', (req, res) => {
