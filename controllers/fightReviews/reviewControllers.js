@@ -56,6 +56,21 @@ async function getUserReviews(req, res) {
   }
 }
 
+async function getHighestRatedUserReviews(req, res) {
+  const { subject } = req.decodedToken
+  try {
+    const reviews = await Reviews.find({ userId: subject })
+      .sort({ rating: 'desc' })
+      .limit(5)
+    if (reviews.length === 0) {
+      return res.status(404).json({ message: 'No reviews found' })
+    }
+    return res.status(200).json(reviews)
+  } catch (err) {
+    res.status(500).json(err.message)
+  }
+}
+
 async function getSingleReview(req, res) {
   try {
     const review = await Reviews.findById(req.params.review_id)
@@ -119,4 +134,5 @@ module.exports = {
   editReview,
   deleteReview,
   getUserReviews,
+  getHighestRatedUserReviews,
 }
