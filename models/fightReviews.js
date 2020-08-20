@@ -30,7 +30,7 @@ const fightReviewSchema = mongoose.Schema({
   },
 })
 
-fightReviewSchema.index({ fight: 1, user: 1 }, { unique: true })
+// fightReviewSchema.index({ fight: 1, user: 1 }, { unique: true })
 
 const FighterReview = mongoose.model('fightReview', fightReviewSchema)
 module.exports = FighterReview
