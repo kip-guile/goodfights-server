@@ -1,8 +1,7 @@
 const Reviews = require('../../models/fightReviews')
-const addRating = require('../averageRating')
 const { validateReviews } = require('../../middleware/validateReviews')
 
-async function addReview(req, res) {
+async function addReview(req, res, next) {
   const { errors, valid } = validateReviews(req.body)
   if (!valid) return res.status(400).json(errors)
   const { subject } = req.decodedToken
@@ -22,9 +21,10 @@ async function addReview(req, res) {
       rating,
     })
     newReview.save().then((review) => {
-      addRating(rating, fightId).then((avg) => {
-        return res.status(201).json(review, avg)
-      })
+      req.review = review
+      req.rating = rating
+      req.fightId = fightId
+      next()
     })
   } catch (err) {
     res.status(500).json({ message: err.message })
