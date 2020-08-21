@@ -1,4 +1,5 @@
 const AverageRating = require('../models/averageRating')
+const Fight = require('../models/fights')
 
 async function addRating(req, res) {
   try {
@@ -36,4 +37,28 @@ async function addRating(req, res) {
   }
 }
 
-module.exports = addRating
+async function getHighestRatedFights(req, res) {
+  let arr = []
+  try {
+    const fights = await AverageRating.find()
+      .lean()
+      .sort({ averageRating: 'desc' })
+      .limit(10)
+    fights.forEach((item) => {
+      arr.push(item.fightId.toString())
+    })
+    if (arr.length === 0) {
+      return res.status(404).json({ message: 'No fights found' })
+    }
+    const fightArray = await Fight.find().where('_id').in(arr).exec()
+    if (!fightArray)
+      return res
+        .status(500)
+        .json({ message: 'error retrieving highest rated fights' })
+    return res.status(200).json(fightArray)
+  } catch (err) {
+    return { message: err.message }
+  }
+}
+
+module.exports = { addRating, getHighestRatedFights }

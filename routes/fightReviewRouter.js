@@ -6,7 +6,7 @@ const {
   getReviews,
   deleteReview,
 } = require('../controllers/fightReviews/index')
-const averageRating = require('../controllers/averageRating')
+const { addRating } = require('../controllers/averageRating')
 const verifyToken = require('../middleware/verifyToken')
 
 // @route GET /api/reviews/
@@ -17,7 +17,7 @@ router.get('/', verifyToken, getReviews)
 // @route POST /api/reviews/
 // @desc Add a Review
 // @access Private
-router.post('/:fight_id', verifyToken, addReview, averageRating)
+router.post('/:fight_id', verifyToken, addReview, addRating)
 
 // @route PUT /api/reviews/:review_id
 // @desc Edit a review's details
