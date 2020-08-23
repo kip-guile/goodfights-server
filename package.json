@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test nyc jest --coverage --detectOpenHandles --forceExit",
+    "test-dev": "cross-env NODE_ENV=test jest --watchAll --verbose --coverage --runInBand"
   },
   "author": "Alexander Oguejiofor",
   "license": "MIT",
@@ -20,9 +21,11 @@
     "helmet": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.0",
+    "supertest": "^4.0.2",
     "validator": "^13.1.1"
   },
   "devDependencies": {
+    "jest": "^26.4.2",
     "nodemon": "^2.0.4"
   }
 }
