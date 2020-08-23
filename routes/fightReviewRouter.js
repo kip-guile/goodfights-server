@@ -5,6 +5,7 @@ const {
   getSingleReview,
   getReviews,
   deleteReview,
+  getFightReviews,
 } = require('../controllers/fightReviews/index')
 const { addRating } = require('../controllers/averageRating')
 const verifyToken = require('../middleware/verifyToken')
@@ -14,7 +15,12 @@ const verifyToken = require('../middleware/verifyToken')
 // @access Private
 router.get('/', verifyToken, getReviews)
 
-// @route POST /api/reviews/
+// @route GET /api/reviews/fight_id
+// @desc Get reviews related to a fight
+// @access Private
+router.get('/:fight_id', verifyToken, getFightReviews)
+
+// @route POST /api/reviews/fight_id
 // @desc Add a Review
 // @access Private
 router.post('/:fight_id', verifyToken, addReview, addRating)
@@ -33,10 +39,5 @@ router.get('/:review_id', verifyToken, getSingleReview)
 // @desc Delete a single review
 // @access Private
 router.delete('/:review_id', verifyToken, deleteReview)
-
-// @route GET /api/reviews/
-// @desc Get all reviews
-// @access Private
-router.get('/', verifyToken, getReviews)
 
 module.exports = router

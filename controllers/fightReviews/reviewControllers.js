@@ -43,6 +43,18 @@ async function getReviews(req, res) {
   }
 }
 
+async function getFightReviews(req, res) {
+  try {
+    const reviews = await Reviews.find().where({ fightId: req.params.fight_id })
+    if (reviews.length === 0) {
+      return res.status(404).json({ message: 'No reviews found' })
+    }
+    return res.status(200).json(reviews)
+  } catch (err) {
+    res.status(500).json(err.message)
+  }
+}
+
 async function getUserReviews(req, res) {
   const { subject } = req.decodedToken
   try {
@@ -135,4 +147,5 @@ module.exports = {
   deleteReview,
   getUserReviews,
   getHighestRatedUserReviews,
+  getFightReviews,
 }
