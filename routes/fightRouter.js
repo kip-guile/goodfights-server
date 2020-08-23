@@ -5,6 +5,7 @@ const {
   getSingleFight,
   editFight,
   deleteFight,
+  getFightFighters,
 } = require('../controllers/fight/index')
 const { getHighestRatedFights } = require('../controllers/averageRating')
 const verifyToken = require('../middleware/verifyToken')
@@ -18,6 +19,11 @@ router.post('/', verifyToken, addFight)
 // @desc Get all fights
 // @access Private
 router.get('/', verifyToken, getFights)
+
+// @route GET /api/fights/fighters
+// @desc Get fighters of a fight
+// @access Private
+router.get('/fighters/:fight_id', verifyToken, getFightFighters)
 
 // @route GET /api/fights/highestrated
 // @desc Get highest rated fights (limit 10)
