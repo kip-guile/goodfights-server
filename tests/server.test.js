@@ -1,7 +1,6 @@
 const request = require('supertest')
 const server = require('../api/server')
 const mongoose = require('mongoose')
-const { expectCt } = require('helmet')
 
 describe('index route', () => {
   it('it runs', async (done) => {
@@ -20,8 +19,6 @@ describe('index route', () => {
 afterAll(async () => {
   try {
     await mongoose.connection.collections.users.drop()
-    await mongoose.connection.collections.fights.drop()
-    await mongoose.connection.collections.division.drop()
     await mongoose.disconnect()
   } catch (error) {
     console.error(error.name, error.message)
