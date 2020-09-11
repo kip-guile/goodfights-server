@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
+  confirmed: { type: Boolean, default: false },
   admin: { type: Boolean, required: true },
   password: { type: String, required: true },
   bio: { type: String, required: false },

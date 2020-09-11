@@ -10,6 +10,9 @@ async function login(req, res) {
 
   try {
     const user = await Users.findOne({ email })
+    if (!user.confirmed) {
+      throw new Error('Please confirm your email to login')
+    }
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = generateToken(user)
       return res.status(200).json({
