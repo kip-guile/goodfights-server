@@ -17,4 +17,9 @@ router.post('/login', userController.login)
 // @access Public
 router.delete('/account', verifyToken, userController.deleteAccount)
 
+// @route POST api/auth/confirmation/:token
+// @desc Confirm user email
+// @access Public
+router.get('/confirmation/:token', userController.emailConfirmation)
+
 module.exports = router

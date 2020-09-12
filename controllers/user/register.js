@@ -2,6 +2,9 @@ const Users = require('../../models/users')
 const bcrypt = require('bcryptjs')
 const generateToken = require('../../helpers/generateToken')
 const { validateSignUpData } = require('../../middleware/validateUserData')
+const sendEmail = require('../../helpers/sendEmail')
+const { welcomeText } = require('../../helpers/constants')
+const confirmEmail = require('../../templates/confirmEmail')
 
 const register = (req, res) => {
   const { errors, valid } = validateSignUpData(req.body)
@@ -27,6 +30,8 @@ const register = (req, res) => {
       .save()
       .then((user) => {
         const token = generateToken(user)
+        const emailToken = generateToken(user, process.env.EMAIL_SECRET)
+        sendEmail(welcomeText, email, confirmEmail(username, emailToken), null)
         return res.status(201).json({
           user: {
             id: user.id,
