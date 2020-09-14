@@ -4,6 +4,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 const mongoURI = require('../config/keys')
 const mongoose = require('mongoose')
+const googlePassport = require('../helpers/googlePassport')
 
 const authRouter = require('../routes/authRouter')
 const fighterRouter = require('../routes/fighterRouter')
@@ -22,6 +23,9 @@ server.use(
     credentials: true,
   })
 )
+
+server.use(googlePassport.Passport.initialize())
+server.use(googlePassport.Passport.session())
 
 server.use('/api/auth', authRouter)
 server.use('/api/fighters', fighterRouter)

@@ -4,6 +4,8 @@ const deleteAccount = require('./deleteAccount')
 const editAccount = require('./editAccount')
 const getUserFighters = require('./getUserFighters')
 const emailConfirmation = require('./emailConfirmation')
+const authGoogle = require('./authGoogle')
+const completeGoogleAuth = require('.//completeGoogleAuth')
 
 module.exports = {
   register,
@@ -12,4 +14,6 @@ module.exports = {
   editAccount,
   getUserFighters,
   emailConfirmation,
+  authGoogle,
+  completeGoogleAuth,
 }
