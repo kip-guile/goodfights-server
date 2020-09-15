@@ -15,11 +15,11 @@ module.exports = (userFullName, token) => {
       name: userFullName,
       intro: 'Are you ready to start picking fights?',
       action: {
-        instructions: 'Please click the button below to verify your account',
+        instructions: 'Please click the button below to reset your password',
         button: {
           color: '#D21F3C',
-          text: 'Verify account',
-          link: `http://localhost:5000/resetpassword/${token}`,
+          text: 'Reset Password',
+          link: `http://localhost:5000/api/auth/confirmation/${token}`,
         },
       },
     },

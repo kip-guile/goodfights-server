@@ -1,7 +1,7 @@
 const User = require('../../models/users')
 const jwt = require('jsonwebtoken')
 
-exports.completeGoogleAuth = async (req, res) => {
+async function completeGoogleAuth(req, res) {
   try {
     const { token } = req.params
     const decodedToken = jwt.decode(token)
@@ -15,3 +15,5 @@ exports.completeGoogleAuth = async (req, res) => {
     res.status(401).json({ message: `Failed to complete authorization` })
   }
 }
+
+module.exports = completeGoogleAuth

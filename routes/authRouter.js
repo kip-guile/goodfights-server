@@ -2,7 +2,8 @@ const router = require('express').Router()
 const userController = require('../controllers/user/index')
 const verifyToken = require('../middleware/verifyToken')
 const googlePassport = require('../helpers/googlePassport')
-const { completeGoogleAuth } = require('../controllers/user/completeGoogleAuth')
+const completeGoogleAuth = require('../controllers/user/completeGoogleAuth')
+const authGoogle = require('../controllers/user/authGoogle')
 
 // @route POST api/auth/register
 // @desc Register new user
@@ -42,12 +43,22 @@ router.get(
   googlePassport.Passport.authenticate('google', {
     failureRedirect: `http://localhost:3000/`,
   }),
-  userController.authGoogle
+  authGoogle
 )
 
 // @route POST api/auth/google/:token
 // @desc complete google auth
 // @access Public
 router.post('/google/:token', completeGoogleAuth)
+
+// @route POST api/auth/google/:token
+// @desc complete google auth
+// @access Public
+router.put('/forgotpassword', userController.resetPassword)
+
+// @route POST api/auth/google/:token
+// @desc complete google auth
+// @access Public
+router.put('/resetpassword', userController.forgotPassword)
 
 module.exports = router

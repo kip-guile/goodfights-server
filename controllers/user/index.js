@@ -5,7 +5,9 @@ const editAccount = require('./editAccount')
 const getUserFighters = require('./getUserFighters')
 const emailConfirmation = require('./emailConfirmation')
 const authGoogle = require('./authGoogle')
-const completeGoogleAuth = require('.//completeGoogleAuth')
+const completeGoogleAuth = require('./completeGoogleAuth')
+const resetPassword = require('./resetPassword')
+const forgotPassword = require('./forgotPassword')
 
 module.exports = {
   register,
@@ -16,4 +18,6 @@ module.exports = {
   emailConfirmation,
   authGoogle,
   completeGoogleAuth,
+  resetPassword,
+  forgotPassword,
 }

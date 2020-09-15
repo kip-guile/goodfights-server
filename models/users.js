@@ -8,12 +8,16 @@ const userSchema = new mongoose.Schema({
     trim: true,
   },
   confirmed: { type: Boolean, default: false },
-  admin: { type: Boolean, required: true },
+  admin: { type: Boolean, required: true, default: false },
   password: { type: String, required: true },
   bio: { type: String, required: false },
   location: { type: String, required: false },
   username: { type: String, required: true },
   website: { type: String, required: false },
+  resetLink: {
+    data: String,
+    default: '',
+  },
   fighters: [
     {
       type: mongoose.Schema.Types.ObjectId,

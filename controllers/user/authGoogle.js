@@ -1,6 +1,6 @@
 const generateToken = require('../../helpers/generateToken')
 
-exports.authGoogle = async (req, res) => {
+async function authGoogle(req, res) {
   try {
     const { user } = req._passport.session
     const token = await generateToken(user)
@@ -11,3 +11,5 @@ exports.authGoogle = async (req, res) => {
     })
   }
 }
+
+module.exports = authGoogle

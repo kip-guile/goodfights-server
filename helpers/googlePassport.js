@@ -1,7 +1,7 @@
 require('dotenv').config()
 const User = require('../models/users')
 const passport = require('passport')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const { reduceUserDetails } = require('../middleware/validateUserData')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
