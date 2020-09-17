@@ -18,33 +18,36 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `http://localhost:5000/api/auth/google/callback`,
+      callbackURL: `${process.env.BACKEND_URL}/auth/google/callback`,
     },
-    async function (accessToken, refreshToken, profile, done) {
+    function (accessToken, refreshToken, profile, done) {
       const googleEmail = profile.emails[0].value
       const encryptedId = bcrypt.hashSync(profile.id, 10)
-      const user = await User.findOne({ email: googleEmail })
-
-      try {
-        if (user) {
-          done(null, user)
-        } else {
-          const newUser = new User({
-            email: googleEmail,
-            password: encryptedId,
-            username: profile.displayName,
-            admin: false,
-          })
-          const saved = await newUser.save()
-          if (saved) {
+      User.findOne({ email: googleEmail })
+        .then((user) => {
+          if (user) {
             done(null, user)
           } else {
-            return res.status(403).json({ general: 'Auth failed' })
+            const newUser = new User({
+              email: googleEmail,
+              password: encryptedId,
+              username: profile.displayName,
+              admin: false,
+              confirmed: true,
+            })
+            newUser
+              .save()
+              .then((user) => {
+                done(null, user)
+              })
+              .catch((err) => {
+                console.log(err)
+              })
           }
-        }
-      } catch (error) {
-        return res.status(500).json(err.message)
-      }
+        })
+        .catch((err) => {
+          return res.status(500).json(err.message)
+        })
     }
   )
 )

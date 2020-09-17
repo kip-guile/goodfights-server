@@ -5,7 +5,7 @@ module.exports = (userFullName, token) => {
     theme: 'salted',
     product: {
       name: 'Goodfights',
-      link: 'http://localhost:3000/',
+      link: `${process.env.CLIENT_URL}`,
       // logo: ToDo(Add logo URL)
     },
   })
@@ -19,7 +19,7 @@ module.exports = (userFullName, token) => {
         button: {
           color: '#D21F3C',
           text: 'Verify account',
-          link: `http://localhost:5000/resetpassword/${token}`,
+          link: `${process.env.BACKEND_URL}/auth/resetpassword/${token}`,
         },
       },
     },

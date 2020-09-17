@@ -41,7 +41,7 @@ router.get(
 router.get(
   '/google/callback',
   googlePassport.Passport.authenticate('google', {
-    failureRedirect: `http://localhost:3000/`,
+    failureRedirect: `${process.env.CLIENT_URL}`,
   }),
   authGoogle
 )
