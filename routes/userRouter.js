@@ -4,7 +4,16 @@ const {
   getHighestRatedUserReviews,
 } = require('../controllers/fightReviews/index')
 const verifyToken = require('../middleware/verifyToken')
-const { editAccount, getUserFighters } = require('../controllers/user/index')
+const {
+  editAccount,
+  getUserFighters,
+  getUser,
+} = require('../controllers/user/index')
+
+// @route GET /api/users//
+// @desc Get user details
+// @access Private
+router.get('/', verifyToken, getUser)
 
 // @route PUT /api/users/
 // @desc Edit user details

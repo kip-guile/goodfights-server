@@ -8,8 +8,10 @@ const authGoogle = require('./authGoogle')
 const completeGoogleAuth = require('./completeGoogleAuth')
 const resetPassword = require('./resetPassword')
 const forgotPassword = require('./forgotPassword')
+const getUser = require('./getUser')
 
 module.exports = {
+  getUser,
   register,
   login,
   deleteAccount,
