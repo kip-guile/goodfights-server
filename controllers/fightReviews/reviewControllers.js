@@ -1,4 +1,6 @@
 const Reviews = require('../../models/fightReviews')
+const Fight = require('../../models/fights')
+const Users = require('../../models/users')
 const { validateReviews } = require('../../middleware/validateReviews')
 
 async function addReview(req, res, next) {
@@ -33,11 +35,49 @@ async function addReview(req, res, next) {
 
 async function getReviews(req, res) {
   try {
-    const reviews = await Reviews.find({})
+    let arr = []
+    let fightarr = []
+    let userarr = []
+    const reviews = await Reviews.find({}).lean()
+    const fights = await Fight.find({}).lean()
+    const users = await Users.find({}).lean()
     if (reviews.length === 0) {
       return res.status(404).json({ message: 'No reviews found' })
     }
-    return res.status(200).json(reviews)
+    fights.forEach((fight) => {
+      fightarr.push(fight)
+    })
+    users.forEach((user) => {
+      userarr.push(user)
+    })
+    reviews.forEach((review) => {
+      let temp = review
+      temp.reviewer = userarr.filter(
+        (user) => user._id.toString() === temp.userId.toString()
+      )
+
+      temp.fight = fightarr.filter(
+        (fight) => fight._id.toString() === temp.fightId.toString()
+      )
+      arr.push(temp)
+    })
+    let output = []
+    arr.forEach((review) => {
+      let construct = {
+        id: review._id,
+        reviewer_name: review.reviewer[0].username,
+        fightId: review.fightId,
+        description: review.review,
+        rating: review.rating,
+        posted_at: review.created_at,
+        fight_title: review.fight[0].title,
+        fight_avatar: review.fight[0].avatar,
+        fight_desc: review.fight[0].description,
+        fight_rating: review.fight[0].rating,
+      }
+      output.push(construct)
+    })
+    return res.status(200).json(output)
   } catch (err) {
     res.status(500).json(err.message)
   }
